@@ -1,0 +1,1 @@
+"In the last match of each IPL season, which partnership had the highest batsman-run total? Return the season, match ID, innings, both player names and IDs, each player's partnership runs, and the total partnership runs. List player 1 as the partner with the higher individual score; if tied, list the higher player ID first. Include tied top partnerships if any."

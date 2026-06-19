@@ -1,0 +1,11 @@
+HINTS:
+- The dataset is split into two logical databases: payment facts are in `payments_db`; merchant configuration, acquirer countries, MCC descriptions, fee rules, and manual sections are in `context_db`.
+- Merchant identifiers use different formats across databases. In `payments_db`, merchant references look like `pay-crossfit-hanna`; in `context_db`, merchant keys look like `MERCHANT::CROSSFIT_HANNA`, and the readable merchant name is stored separately. Normalize case, prefixes, and hyphen/underscore differences when reconciling merchants.
+- Acquirer identifiers also use different formats. In `payments_db`, acquirer references look like `route-dagoberts-vault`; in `context_db`, acquirer keys look like `ACQ::DAGOBERTS_VAULT`, and the readable acquirer name is stored separately.
+- The direct acquirer country is not stored in `payments_db`. To determine whether a payment is local or cross-border, join the payment acquirer reference to `context_db.acquirer_countries` and compare the acquirer country with the payment's issuing country.
+- The merchant category description is not stored in `payments_db`. Use merchant context and `merchant_category_codes` to recover MCC descriptions.
+- The manual defines fraud as fraudulent EUR volume divided by total EUR volume.
+- The `rate` field is stored in basis points. The manual defines transaction fee as `fixed_amount + rate * transaction_value / 10000`.
+- A payment may match multiple fee rules; all matching rules apply, and the transaction fee is the sum of each matched rule's `fixed_amount + rate * transaction_value / 10000`.
+- For fee rules, null scalar fields apply to all values. Empty list-valued conditions apply to all values: if a rule has no rows in `fee_rule_account_types`, `fee_rule_mccs`, or `fee_rule_acis`, that field is unrestricted.
+- Monthly volume and monthly fraud level are computed per merchant over natural calendar months. Volume buckets such as `100k-1m` and `1m-5m` are inclusive ranges. Fraud buckets such as `7.2%-7.7%` and `7.7%-8.3%` are percentage ranges; compare them to fraud rates as decimal values, for example `7.2%` is `0.072`.

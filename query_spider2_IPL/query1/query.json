@@ -1,0 +1,1 @@
+"For each IPL season, identify the three highest run scorers and the three highest credited wicket takers, then pair them by rank: run scorer 1 with wicket taker 1, run scorer 2 with wicket taker 2, and run scorer 3 with wicket taker 3. Break ties by the smaller player ID. Return the season, rank, player names, player IDs, and the run or wicket totals."

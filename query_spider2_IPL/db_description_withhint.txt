@@ -1,0 +1,6 @@
+HINTS:
+- Match, player, and team identifiers use different wrappers across databases; compare the numeric core when matching records.
+- Credited bowling wickets exclude dismissals recorded as run out, hit wicket, or retired hurt.
+- Bowling average is runs conceded divided by credited wickets. Runs conceded to a bowler include batsman runs plus wides and no-balls, but not byes or leg-byes.
+- Over totals use batsman runs plus all extra runs.
+- Player country, batting hand, and bowling style appear in profile text notes.

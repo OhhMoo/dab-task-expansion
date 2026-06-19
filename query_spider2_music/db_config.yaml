@@ -1,0 +1,13 @@
+db_clients:
+  catalog_database:
+    db_type: mongo
+    db_name: spider2_music_catalog
+    dump_folder: query_dataset/catalog_mongo
+
+  sales_database:
+    db_type: duckdb
+    db_path: query_dataset/sales.duckdb
+
+  people_database:
+    db_type: sqlite
+    db_path: query_dataset/people.db

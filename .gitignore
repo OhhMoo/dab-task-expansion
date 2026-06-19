@@ -1,0 +1,14 @@
+query_*/clean/
+query_*/logs/
+query_*/query*/logs/
+query_*/__pycache__/
+query_*/*/__pycache__/
+query_*/*/*/__pycache__/
+*.pyc
+
+**/logs/
+**/__pycache__/
+**/*.pyc
+**/.DS_Store
+**/manual_querycode/
+**/clean/

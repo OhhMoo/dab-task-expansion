@@ -1,0 +1,1 @@
+"For every result match, combine batsman runs and extras for each over, take the single highest over total in that match, and return the number of matches and the average of those match-level maxima rounded to two decimals."

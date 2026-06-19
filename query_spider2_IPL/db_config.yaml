@@ -1,0 +1,18 @@
+db_clients:
+  match_database:
+    db_type: postgres
+    db_name: spider2_ipl_match
+    sql_file: query_dataset/match_context.sql
+
+  delivery_database:
+    db_type: duckdb
+    db_path: query_dataset/deliveries.duckdb
+
+  dismissal_database:
+    db_type: sqlite
+    db_path: query_dataset/dismissals.db
+
+  profile_database:
+    db_type: mongo
+    db_name: spider2_ipl_profiles
+    dump_folder: query_dataset/profile_mongo

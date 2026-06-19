@@ -1,0 +1,82 @@
+You are working with four databases to solve this query.
+
+Here are the descriptions of these four databases:
+
+1. match_database
+   - This database is stored in a PostgreSQL database and contains IPL match context, season information, outcomes, and player appearances.
+   - This database consists of two tables:
+     - matches
+       - This table contains match-level records.
+       - Fields:
+         - match_key (str): Match identifier
+         - season_id (int): IPL season identifier
+         - match_date (str): Match date
+         - venue (str): Venue name
+         - team_one_ref (str): First listed team identifier
+         - team_two_ref (str): Second listed team identifier
+         - toss_winner_ref (str): Toss winner team identifier
+         - toss_decision (str): Toss decision
+         - win_type (str): Win type
+         - win_margin (int): Win margin
+         - outcome_type (str): Match outcome type
+         - match_winner_ref (str): Winning team identifier
+         - player_of_match_ref (str): Player of the match identifier
+     - player_appearances
+       - This table contains one record for a player appearing in a match.
+       - Fields:
+         - match_key (str): Match identifier
+         - player_ref (str): Player identifier
+         - role_note (str): Text note containing the player's squad role
+         - team_ref (str): Team identifier
+
+2. delivery_database
+   - This database is stored in a DuckDB database and contains delivery-level scoring records.
+   - This database consists of one table:
+     - deliveries
+       - This table contains one record for each delivery.
+       - Fields:
+         - match_ref (str): Match identifier
+         - innings_no (int): Innings number
+         - over_id (int): Over number
+         - ball_id (int): Ball number within the over
+         - batting_team_ref (str): Batting team identifier
+         - bowling_team_ref (str): Bowling team identifier
+         - striker_position (int): Batting position of the striker
+         - striker_ref (str): Striker player identifier
+         - non_striker_ref (str): Non-striker player identifier
+         - bowler_ref (str): Bowler player identifier
+         - batsman_runs (int): Runs credited to the striker
+         - extra_runs (int): Extra runs on the delivery
+         - extra_type (str): Extra type when recorded
+
+3. dismissal_database
+   - This database is stored in a SQLite database and contains wicket events.
+   - This database consists of one table:
+     - dismissal_events
+       - This table contains one record for each wicket event.
+       - Fields:
+         - match_code (str): Match identifier
+         - innings_no (int): Innings number
+         - over_id (int): Over number
+         - ball_id (int): Ball number within the over
+         - player_out_ref (str): Dismissed player identifier
+         - dismissal_note (str): Text note containing dismissal information
+
+4. profile_database
+   - This database is stored in a MongoDB database and contains player and team profile documents.
+   - This database consists of two collections:
+     - players
+       - This collection contains player profiles.
+       - Fields:
+         - _id
+         - player_key (str): Player identifier
+         - player_name (str): Player name
+         - date_of_birth (str): Player date of birth
+         - profile_note (str): Text note containing country, batting hand, and bowling style
+     - teams
+       - This collection contains team profiles.
+       - Fields:
+         - _id
+         - team_key (str): Team identifier
+         - team_name (str): Team name
+         - profile_note (str): Text note containing team identity information

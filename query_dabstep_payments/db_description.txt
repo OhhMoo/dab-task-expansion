@@ -1,0 +1,100 @@
+You are working with two databases to solve this query.
+
+Here are the descriptions of these two databases:
+
+1. payments_db
+   - This database is stored in DuckDB and contains payment transaction facts.
+   - This database consists of one table:
+     - payments
+       - Each row is one payment transaction.
+       - Fields:
+         - psp_reference (str): Unique payment identifier.
+         - merchant_ref (str): Merchant reference in payment-system format, such as `pay-crossfit-hanna`.
+         - acquirer_ref (str): Acquirer reference in payment-system format, such as `route-dagoberts-vault`.
+         - card_scheme (str): Card scheme used for the payment.
+         - year (int): Payment year.
+         - payment_date (date): Payment date.
+         - month (int): Payment month.
+         - hour_of_day (int): Payment hour.
+         - minute_of_hour (int): Payment minute.
+         - day_of_year (int): Day number within the year.
+         - is_credit (bool): Whether the payment used a credit card.
+         - eur_amount (float): Payment amount in euros.
+         - ip_country (str): Shopper IP country code.
+         - issuing_country (str): Card issuing country code.
+         - device_type (str): Shopper device type.
+         - ip_address (str): Hashed shopper IP value.
+         - email_address (str): Hashed shopper email value.
+         - card_number (str): Hashed card number value.
+         - shopper_interaction (str): Payment interaction type, e.g. Ecommerce or POS.
+         - card_bin (str): Bank identification number.
+         - has_fraudulent_dispute (bool): Whether the payment later had a fraudulent dispute.
+         - is_refused_by_adyen (bool): Whether the payment was refused.
+         - aci (str): Authorization Characteristics Indicator code.
+
+2. context_db
+   - This database is stored in SQLite and contains merchant context, acquirer countries, MCC descriptions, fee rules, and manual sections.
+   - This database consists of the following tables:
+     - merchants
+       - One row per merchant.
+       - Fields:
+         - merchant_key (str): Merchant reference in context-system format, such as `MERCHANT::CROSSFIT_HANNA`.
+         - merchant_name (str): Human-readable merchant name.
+         - capture_delay_raw (str): Original capture-delay value from merchant configuration.
+         - capture_delay_bucket (str): Capture-delay bucket used by fee rules: `immediate`, `manual`, `<3`, `3-5`, or `>5`.
+         - merchant_category_code (int): Merchant category code.
+         - account_type (str): Merchant account type.
+
+     - merchant_acquirers
+       - Configured acquirers for each merchant.
+       - Fields:
+         - merchant_key (str): Merchant key linking to merchants.merchant_key.
+         - acquirer_key (str): Acquirer key linking to acquirer_countries.acquirer_key.
+         - position (int): Position of the acquirer in the original merchant configuration list.
+
+     - acquirer_countries
+       - Country lookup for acquirers.
+       - Fields:
+         - acquirer_key (str): Acquirer reference in context-system format, such as `ACQ::DAGOBERTS_VAULT`.
+         - acquirer_name (str): Human-readable acquirer name.
+         - country_code (str): Country where the acquirer is located.
+
+     - merchant_category_codes
+       - Merchant category code lookup.
+       - Fields:
+         - mcc (int): Merchant category code.
+         - description (str): Description of the merchant category.
+
+     - fee_rules
+       - Scalar fee-rule fields.
+       - Fields:
+         - rule_id (int): Fee rule identifier.
+         - card_scheme (str): Card scheme.
+         - capture_delay (str): Capture-delay condition, or null if the rule applies to all capture delays.
+         - monthly_fraud_level (str): Monthly fraud-rate condition, or null if the rule applies to all levels.
+         - monthly_volume (str): Monthly volume condition, or null if the rule applies to all volumes.
+         - is_credit (int): 1 for credit, 0 for debit, or null if the rule applies to both.
+         - fixed_amount (float): Fixed fee amount in euros.
+         - rate (int): Variable fee rate. The manual defines the fee as `fixed_amount + rate * transaction_value / 10000`.
+         - intracountry (int): 1 for issuer/acquirer same country, 0 for different countries, or null if either applies.
+         - raw_json (str): Original fee-rule JSON.
+
+     - fee_rule_account_types
+       - Account-type list conditions for fee rules. If a rule has no rows here, it applies to all account types.
+       - Fields: rule_id, account_type.
+
+     - fee_rule_mccs
+       - MCC list conditions for fee rules. If a rule has no rows here, it applies to all MCCs.
+       - Fields: rule_id, mcc.
+
+     - fee_rule_acis
+       - ACI list conditions for fee rules. If a rule has no rows here, it applies to all ACI codes.
+       - Fields: rule_id, aci.
+
+     - manual_sections
+       - Sections extracted from the merchant manual.
+       - Fields:
+         - section_id (int): Section identifier.
+         - heading_level (int): Markdown heading level.
+         - heading (str): Section heading.
+         - body (str): Section body text.

@@ -1,0 +1,10 @@
+season_id,match_id,innings_no,player1_id,player1_name,player1_runs,player2_id,player2_name,player2_runs,partnership_runs
+1,336045,2,31,YK Pathan,34,32,SR Watson,27,61
+2,392244,1,97,HH Gibbs,25,57,RG Sharma,24,49
+3,419170,1,21,SK Raina,47,20,MS Dhoni,22,69
+4,501276,1,185,M Vijay,89,19,MEK Hussey,63,152
+5,548386,2,214,MS Bisla,88,9,JH Kallis,41,129
+6,598078,1,221,KA Pollard,32,208,AT Rayudu,15,47
+7,734054,1,62,WP Saha,77,345,M Vohra,46,123
+8,829828,1,383,LMP Simmons,67,57,RG Sharma,50,117
+9,981024,2,162,CH Gayle,76,8,V Kohli,32,108

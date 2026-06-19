@@ -1,0 +1,7 @@
+db_clients:
+  payments_db:
+    db_type: duckdb
+    db_path: query_dataset/payments.duckdb
+  context_db:
+    db_type: sqlite
+    db_path: query_dataset/context.db

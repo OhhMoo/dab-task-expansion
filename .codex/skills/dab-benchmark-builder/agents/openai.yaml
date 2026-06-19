@@ -1,0 +1,4 @@
+interface:
+  display_name: "DAB Benchmark Builder"
+  short_description: "Build DAB-style benchmark datasets from local source data."
+  default_prompt: "Build a DAB-style benchmark dataset from the provided local source files."

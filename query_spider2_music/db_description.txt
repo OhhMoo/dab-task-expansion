@@ -1,0 +1,91 @@
+You are working with three databases to solve this query.
+
+Here are the descriptions of these three databases:
+
+1. catalog_database
+   - This database is stored in a MongoDB database and contains the music catalog, playlist membership, and catalog notes.
+   - This database consists of six collections:
+     - tracks
+       - This collection contains one document for each track in the catalog.
+       - Fields:
+         - _id
+         - track_key (str): Catalog identifier for the track
+         - track_name (str): Track title
+         - album_key (str): Catalog identifier for the album
+         - duration_ms (int): Track duration in milliseconds
+         - byte_size (int): Track file size in bytes
+         - catalog_price_note (str): Text note containing the catalog list price
+         - composer_note (str): Text note containing composer credit information
+         - style_note (str): Text note containing genre and media format information
+     - albums
+       - This collection contains album records.
+       - Fields:
+         - _id
+         - album_key (str): Catalog identifier for the album
+         - title (str): Album title
+         - artist_key (str): Catalog identifier for the artist
+     - artists
+       - This collection contains artist records.
+       - Fields:
+         - _id
+         - artist_key (str): Catalog identifier for the artist
+         - name (str): Artist name
+     - playlists
+       - This collection contains playlist records.
+       - Fields:
+         - _id
+         - playlist_key (str): Catalog identifier for the playlist
+         - name (str): Playlist name
+         - playlist_note (str): Text note containing playlist label information
+     - playlist_entries
+       - This collection contains playlist entry records.
+       - Fields:
+         - _id
+         - playlist_key (str): Playlist identifier
+         - track_key (str): Track identifier
+         - entry_index (int): Entry sequence number
+     - manual_sections
+       - This collection contains short reference notes for catalog conventions.
+       - Fields:
+         - _id
+         - section_id (str): Reference section identifier
+         - body (str): Reference text
+
+2. sales_database
+   - This database is stored in a DuckDB database and contains invoice and invoice-line sales records.
+   - This database consists of two tables:
+     - invoices
+       - This table contains invoice-level sales records.
+       - Fields:
+         - invoice_id (int): Invoice identifier
+         - buyer_ref (str): Buyer identifier used on sales records
+         - invoice_date (str): Invoice timestamp
+         - billing_country (str): Country recorded on the invoice
+         - invoice_total (float): Total invoice amount
+     - line_items
+       - This table contains sold track line items.
+       - Fields:
+         - line_item_id (int): Line item identifier
+         - invoice_id (int): Invoice identifier
+         - track_ref (str): Track identifier used on sales records
+         - unit_price (float): Sold unit price
+         - quantity (int): Quantity sold
+
+3. people_database
+   - This database is stored in a SQLite database and contains customer and employee context.
+   - This database consists of two tables:
+     - customers
+       - This table contains customer records.
+       - Fields:
+         - customer_key (str): Customer identifier
+         - first_name (str): Customer first name
+         - last_name (str): Customer last name
+         - company_name (str): Customer company name when recorded
+         - country (str): Customer country
+         - sales_support_ref (str): Sales support identifier recorded for the customer
+     - employees
+       - This table contains employee records.
+       - Fields:
+         - employee_key (str): Employee identifier
+         - full_name (str): Employee full name
+         - title (str): Employee title

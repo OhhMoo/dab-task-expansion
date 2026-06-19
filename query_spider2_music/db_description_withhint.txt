@@ -1,0 +1,6 @@
+HINTS:
+- Track, customer, and employee identifiers use different wrappers across databases; compare the numeric core when matching records.
+- Track genre and media format appear in catalog style notes, not as dedicated fields.
+- Protected media formats are catalog notes whose media phrase begins with "Protected".
+- Track durations are milliseconds. Length types use all catalog tracks: short covers the minimum through the midpoint between minimum and average, medium covers above that through the midpoint between average and maximum, and long covers above that through the maximum.
+- A missing company is stored as NULL in people_database.customers.company_name.
