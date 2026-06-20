@@ -28,6 +28,8 @@ The `query_dataset/` directory contains the visible databases used by agents. Qu
 | Dataset | Query count | DBMS | Tables |
 | --- | ---: | --- | ---: |
 | `query_dabstep_payments` | 6 | DuckDB, SQLite | 10 |
+| `query_olist_ecommerce` | 6 | DuckDB, SQLite | 8 |
+| `query_pitchfork_reviews` | 6 | DuckDB, SQLite | 6 |
 | `query_spider2_IPL` | 10 | PostgreSQL, DuckDB, SQLite, MongoDB | 6 |
 | `query_spider2_airlines` | 7 | DuckDB, SQLite | 5 |
 | `query_spider2_bowling_league` | 6 | DuckDB, PostgreSQL, MongoDB | 7 |
@@ -36,7 +38,8 @@ The `query_dataset/` directory contains the visible databases used by agents. Qu
 | `query_spider2_imdb_movies` | 8 | PostgreSQL, DuckDB | 5 |
 | `query_spider2_music` | 5 | MongoDB, DuckDB, SQLite | 10 |
 | `query_spider2_stacking` | 10 | PostgreSQL, DuckDB, MongoDB | 6 |
-| **Total** | **68** |  | **60** |
+| `query_wwe` | 8 | DuckDB, SQLite | 8 |
+| **Total** | **88** |  | **82** |
 
 ## What Is Not Included
 

@@ -1,0 +1,8 @@
+db_clients:
+  match_database:
+    db_type: duckdb
+    db_path: query_dataset/match_facts.duckdb
+
+  context_database:
+    db_type: sqlite
+    db_path: query_dataset/wwe_context.db

@@ -1,0 +1,1 @@
+"For NXT TakeOver matches with named match types and recorded durations, which match type has the highest average duration among types with at least five recorded matches? Return the match type, number of matches, and average minutes rounded to two decimals."

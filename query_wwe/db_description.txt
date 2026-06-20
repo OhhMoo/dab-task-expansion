@@ -1,0 +1,63 @@
+You are working with two databases to solve this query.
+
+Here are the descriptions of these two databases:
+
+1. match_database
+   - This database is stored in a DuckDB database and contains deduplicated WWE, WWF, WWWF, WCW, and NXT match results.
+   - This database consists of one table:
+     - match_results
+       - This table contains one record for each listed match after removing repeated scraper copies.
+       - Fields:
+         - match_ref (str): Match identifier.
+         - card_ref (str): Card/show identifier as recorded on the match fact row.
+         - winner_ref (str): Winner-side wrestler identifier.
+         - opponent_ref (str): Opponent-side wrestler identifier.
+         - result_text (str): Result notation such as pin, submission, DQ, count-out, draw, or no contest.
+         - match_type_ref (str): Match-type identifier.
+         - recorded_duration (str): Recorded match duration text.
+         - title_ref (str): Championship/title identifier.
+         - title_change (int): 1 if the title changed hands on this match, otherwise 0.
+
+2. context_database
+   - This database is stored in a SQLite database and contains show context, event catalog values, locations, promotions, wrestlers, titles, and match-type names.
+   - This database consists of seven tables:
+     - cards
+       - This table contains card/show metadata.
+       - Fields:
+         - card_key (str): Card/show identifier.
+         - event_key (str): Event catalog identifier.
+         - promotion_key (str): Promotion catalog identifier.
+         - location_key (str): Location catalog identifier.
+         - event_date (str): Event date in YYYY-MM-DD format.
+         - card_url (str): Source card URL.
+         - event_note (str): Short text note containing pay-per-view, venue-country, and attendance details.
+     - events
+       - This table contains event names.
+       - Fields:
+         - event_key (str): Event catalog identifier.
+         - event_name (str): Event or show name.
+     - promotions
+       - This table contains promotion names.
+       - Fields:
+         - promotion_key (str): Promotion catalog identifier.
+         - promotion_name (str): Promotion name.
+     - locations
+       - This table contains location names.
+       - Fields:
+         - location_key (str): Location catalog identifier.
+         - location_name (str): Location text, usually city and region.
+     - wrestlers
+       - This table contains wrestler and team-side names.
+       - Fields:
+         - wrestler_key (str): Wrestler or side identifier.
+         - ring_name (str): Wrestler or team-side display name.
+     - titles
+       - This table contains championship/title names.
+       - Fields:
+         - title_key (str): Title identifier.
+         - title_name (str): Championship or title name.
+     - match_types
+       - This table contains match-type names.
+       - Fields:
+         - match_type_key (str): Match-type identifier.
+         - match_type_name (str): Match stipulation/type name.

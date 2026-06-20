@@ -1,0 +1,7 @@
+HINTS:
+- Reference strings use different prefixes across the two databases; compare the numeric core after stripping non-digits.
+- Recorded durations are text values such as MM:SS, and occasionally may be HH:MM:SS. Convert them to seconds or minutes before ranking or averaging durations.
+- The cards.event_note text contains pay-per-view status, venue country, and attendance in short labeled phrases.
+- Multi-person matches may be indicated by team-side names containing "&" or by match-type wording such as triple-threat, fatal four-way, ladder, elimination chamber, battle royal, WarGames, or similar.
+- In result_text, DQ means disqualification and CO means count-out. For title matches, those outcomes usually mean the title did not change unless title_change is 1.
+- For United States locations, the final comma-separated component of location_name is the state name.
