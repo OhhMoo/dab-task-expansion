@@ -1,0 +1,4 @@
+payment_method,jan_paid_orders,jan_late_night_share,apr_paid_orders,apr_late_night_share,late_night_share_change
+CREDIT,1171,35.08,1219,23.05,-12.02
+VOUCHER,8170,42.39,13189,32.42,-9.98
+STORE_DIRECT_PAYMENT,825,16.85,1603,7.98,-8.87

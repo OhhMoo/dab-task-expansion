@@ -1,0 +1,81 @@
+1. delivery_orders_database (DuckDB)
+
+Purpose: core order facts for delivery-center orders.
+
+Tables:
+
+- orders_core: one row per order record.
+  - order_ref (TEXT): order token.
+  - store_ref (TEXT): store token recorded on the order.
+  - channel_ref (TEXT): sales-channel token recorded on the order.
+  - payment_request_ref (TEXT): payment request token for the order.
+  - delivery_request_ref (TEXT): delivery request token for the order.
+  - order_status (TEXT): order status, such as FINISHED or CANCELED.
+  - order_amount (DOUBLE): customer order amount.
+  - order_delivery_fee (DOUBLE): delivery fee charged on the order.
+  - order_delivery_cost (DOUBLE): delivery cost for the order.
+
+2. delivery_finance_database (SQLite)
+
+Purpose: payment lines, delivery attempts, and order timing measurements.
+
+Tables:
+
+- deliveries_fact: one row per delivery attempt record.
+  - delivery_ref (TEXT): delivery attempt token.
+  - delivery_order_ref (TEXT): delivery-side order token.
+  - driver_ref (TEXT): driver token recorded on the delivery.
+  - delivery_distance_meters (REAL): delivery distance in meters.
+  - delivery_status (TEXT): delivery status, such as DELIVERED, DELIVERING, or CANCELLED.
+
+- payments_fact: one row per payment record.
+  - payment_ref (TEXT): payment token.
+  - payment_order_ref (TEXT): payment-side order token.
+  - payment_amount (REAL): payment amount.
+  - payment_fee (REAL): payment fee.
+  - payment_method (TEXT): payment method.
+  - payment_status (TEXT): payment status.
+
+- order_timeline: order calendar and process-time measurements.
+  - timeline_order_ref (TEXT): timeline-side order token.
+  - date_label (TEXT): order date label.
+  - hour_label (TEXT): order hour label.
+  - accepted_clock (TEXT): accepted timestamp text.
+  - finished_clock (TEXT): finished timestamp text.
+  - production_minutes (REAL): production-time metric in minutes.
+  - transit_minutes (REAL): transit-time metric in minutes.
+  - cycle_minutes (REAL): cycle-time metric in minutes.
+  - collected_minutes (REAL): collected-time metric in minutes.
+  - paused_minutes (REAL): paused-time metric in minutes.
+
+3. delivery_registry_database (PostgreSQL)
+
+Purpose: registry tables for hubs, stores, sales channels, and drivers.
+
+Tables:
+
+- hub_registry: hub metadata.
+  - hub_ref (TEXT): hub token.
+  - hub_name (TEXT): hub name.
+  - hub_city (TEXT): hub city.
+  - hub_state (TEXT): hub state abbreviation.
+  - hub_latitude (DOUBLE PRECISION): hub latitude.
+  - hub_longitude (DOUBLE PRECISION): hub longitude.
+
+- store_registry: store metadata.
+  - store_ref (TEXT): store token.
+  - hub_ref (TEXT): hub token for the store's hub.
+  - store_name (TEXT): store name.
+  - store_segment (TEXT): store segment, such as FOOD or GOOD.
+  - store_plan_price (DOUBLE PRECISION): store plan price.
+  - location_note (TEXT): text note containing store latitude and longitude.
+
+- channel_registry: sales-channel metadata.
+  - channel_ref (TEXT): channel token.
+  - channel_name (TEXT): channel name.
+  - channel_type (TEXT): channel type.
+
+- driver_registry: delivery-driver metadata.
+  - driver_ref (TEXT): driver token.
+  - driver_modal (TEXT): driver modal type.
+  - driver_type (TEXT): driver operating type.

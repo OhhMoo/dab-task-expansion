@@ -1,0 +1,11 @@
+HINTS:
+
+- Tokens for the same underlying order, payment request, delivery request, store, channel, hub, or driver may use different prefixes, separators, and zero padding across databases. Compare their numeric component after removing prefixes, suffixes, separators, and leading zero padding.
+- Month and hour information is stored in timeline-style labels. For example, a date label contains a month component and an hour label contains the order hour.
+- A completed delivery means a delivery attempt with the completed status label.
+- When a task asks for completed deliveries or delivery attempts, treat repeated completed delivery attempts as separate observations. Use distinct-order counting only when the task explicitly asks for orders.
+- A paid payment is a payment record whose status label is paid. When reconciling paid amount to an order, sum all paid payment rows belonging to that payment request.
+- If a reconciliation task is phrased around paid-backed orders or says to include only orders with paid payment records, exclude finished orders that have no paid payment rows from the reconciliation totals.
+- Late night means order hours 22, 23, 0, 1, 2, 3, 4, and 5.
+- Paid amount per kilometer is total paid amount divided by total delivery distance measured in kilometers.
+- Zero-plan stores are stores whose plan price is zero or missing; paid-plan stores have a positive plan price.

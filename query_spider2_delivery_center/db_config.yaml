@@ -1,0 +1,11 @@
+db_clients:
+  delivery_orders_database:
+    db_type: duckdb
+    db_path: query_dataset/delivery_orders.duckdb
+  delivery_finance_database:
+    db_type: sqlite
+    db_path: query_dataset/delivery_finance.sqlite
+  delivery_registry_database:
+    db_type: postgres
+    db_name: spider2_delivery_registry
+    sql_file: query_dataset/delivery_registry.sql
